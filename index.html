@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Dynamic Webpage</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 20px;
+    }
+  </style>
+</head>
+<body>
+  <h1>Dynamic Webpage</h1>
+  <div id="content"></div>
+
+  <script>
+    // Function to retrieve and display file content
+    async function retrieveAndDisplayContent() {
+      const filePath = window.location.pathname; // Get the current file path
+      const fileName = filePath.split('/').pop(); // Extract the filename from the path
+      const response = await fetch(filePath); // Fetch the content of the file
+      const content = await response.text(); // Read the content as text
+      document.getElementById('content').innerHTML = `<p>File Path: ${fileName}</p><pre>${content}</pre>`; // Display the filename and content
+    }
+
+    // Call the function when the page is loaded
+    window.onload = retrieveAndDisplayContent;
+  </script>
+</body>
+</html>
